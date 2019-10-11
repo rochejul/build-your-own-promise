@@ -12,7 +12,10 @@ describe('Promise - ', () => {
             });
 
             it('should return a Promise', () => {
-                expect(new MyPromise((resolve) => resolve(42)).then(() => 44) instanceof MyPromise).toBeTruthy();
+                expect(
+                    new MyPromise((resolve) => resolve(42))
+                    .then(() => 44) instanceof MyPromise
+                ).toBeTruthy();
             });
 
             const variousReturnedData = [
@@ -78,7 +81,8 @@ describe('Promise - ', () => {
             });
 
             it('should return a Promise', () => {
-                expect(new MyPromise((resolve, reject) => reject(new Error('an error'))).catch((err) => err) instanceof MyPromise).toBeTruthy();
+                expect(new MyPromise((resolve, reject) => reject(new Error('an error')))
+                .catch((err) => err) instanceof MyPromise).toBeTruthy();
             });
 
             const variousReturnedData = [
@@ -128,7 +132,9 @@ describe('Promise - ', () => {
             });
 
             it('should return a Promise', () => {
-                expect(MyPromise.resolve(42) instanceof MyPromise).toBeTruthy();
+                expect(
+                    MyPromise.resolve(42) instanceof MyPromise
+                ).toBeTruthy();
             });
 
             it('should return a resolved promise', () => {
@@ -146,17 +152,19 @@ describe('Promise - ', () => {
             });
 
             it('should return a Promise', () => {
-                expect(MyPromise.reject(new Error('an error occured')) instanceof MyPromise).toBeTruthy();
+                expect(
+                    MyPromise.reject(new Error('an error occurred')) instanceof MyPromise
+                ).toBeTruthy();
             });
 
-            it('should return a rejeced promise', () => {
+            it('should return a rejected promise', () => {
                 return MyPromise
-                    .reject(new Error('an error occured'))
+                    .reject(new Error('an error occurred'))
                     .then(() => {
                         expect(true).toBe(false);
                     })
                     .catch((e) => {
-                        expect(e.message).toBe('an error occured');
+                        expect(e.message).toBe('an error occurred');
                     });
             });
         });
@@ -167,7 +175,9 @@ describe('Promise - ', () => {
             });
 
             it('should return a Promise', () => {
-                expect(MyPromise.all([]) instanceof MyPromise).toBeTruthy();
+                expect(
+                    MyPromise.all([]) instanceof MyPromise
+                ).toBeTruthy();
             });
 
             it('should return a resolved promise if all provided promises are resolved', () => {
@@ -189,7 +199,7 @@ describe('Promise - ', () => {
                         MyPromise.resolve(42),
                         25,
                         new MyPromise((resolve, reject) => {
-                            setTimeout(() => reject(new Error('an error occured')), 500);
+                            setTimeout(() => reject(new Error('an error occurred')), 500);
                         })
                     ])
                     .then(() => {
@@ -197,7 +207,7 @@ describe('Promise - ', () => {
                         expect(true).toBe(false);
                     })
                     .catch((e) => {
-                        expect(e.message).toBe('an error occured');
+                        expect(e.message).toBe('an error occurred');
                     });
             });
         });
@@ -208,7 +218,9 @@ describe('Promise - ', () => {
             });
 
             it('should return a Promise', () => {
-                expect(MyPromise.race([]) instanceof MyPromise).toBeTruthy();
+                expect(
+                    MyPromise.race([]) instanceof MyPromise
+                ).toBeTruthy();
             });
 
             it('should return a resolved promise if the first achieved promise is resolved', () => {
@@ -233,13 +245,13 @@ describe('Promise - ', () => {
                 return MyPromise
                     .race([
                         new MyPromise((resolve, reject) => {
-                            setTimeout(() => reject(new Error('an error occured - 1')), 350);
+                            setTimeout(() => reject(new Error('an error occurred - 1')), 350);
                         }),
                         new MyPromise((resolve, reject) => {
-                            setTimeout(() => reject(new Error('an error occured - 2')), 150);
+                            setTimeout(() => reject(new Error('an error occurred - 2')), 150);
                         }),
                         new MyPromise((resolve, reject) => {
-                            setTimeout(() => reject(new Error('an error occured - 3')), 500);
+                            setTimeout(() => reject(new Error('an error occurred - 3')), 500);
                         })
                     ])
                     .then(() => {
@@ -247,7 +259,7 @@ describe('Promise - ', () => {
                         expect(true).toBe(false);
                     })
                     .catch((e) => {
-                        expect(e.message).toBe('an error occured - 2');
+                        expect(e.message).toBe('an error occurred - 2');
                     });
             });
         });
